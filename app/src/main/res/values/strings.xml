@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BookCase2</string>
+
+    <string name="fullBookListAPI">https://kamorris.com/lab/audlib/booksearch.php</string>
+    <string name="bookSearchAPI">https://kamorris.com/lab/audlib/booksearch.php?search=</string>
+    <string name="Duration">Duration: </string>
+    <string name="published">Published: </string>
+    <string name="searchButton">Search</string>
+
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".PlayerFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight=".7"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/playerTitleTextView"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/pauseplay"
+        android:layout_width="129dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".15"
+        android:background="@drawable/ic_pause_circle_outline_black_24dp" />
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".15"
+        android:background="@drawable/ic_stop_black_24dp" />
+</LinearLayout>
