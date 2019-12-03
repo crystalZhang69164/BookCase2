@@ -78,7 +78,7 @@ public class BookDetailsFragment extends Fragment {
         });
 
         view.findViewById(R.id.playbutton).setOnClickListener((v)-> {
-            (PlayButtonInterface)
+            File audio = new File(getContext().getFilesDir()), book.getTitle() + ".mp3");
         };
         return view;
     }
