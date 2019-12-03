@@ -6,11 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -20,6 +22,7 @@ import java.io.File;
 
 public class BookDetailsFragment extends Fragment {
 
+    //reference to all the ctrls
     Context parent;
     Book book;
     TextView titleView;
@@ -27,6 +30,7 @@ public class BookDetailsFragment extends Fragment {
     TextView durationView;
     TextView publishedView;
     ImageView coverView;
+    SeekBar seekBar;
 
 
     public final static String BOOK_KEY = "title";
@@ -78,8 +82,11 @@ public class BookDetailsFragment extends Fragment {
         });
 
         view.findViewById(R.id.playbutton).setOnClickListener((v)-> {
-            File audio = new File(getContext().getFilesDir()), book.getTitle() + ".mp3");
-        };
+            File audio = new File(getContext().getFilesDir(), book.getTitle() + ".mp3");
+            if (!audio.exists()) {
+                ((BookDetailsFragmentLandscape.audioControlLandscape) getActivity()).playAudioLandscape(book.getId(), seekBar.getProgress());
+                Log.d("playing", "from web");
+            }        });
         return view;
     }
 
