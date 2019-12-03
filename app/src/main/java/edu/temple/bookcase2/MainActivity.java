@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     Button searchBtn;
     EditText editText;
 
+
     ViewPager pager;
     AudiobookService.MediaControlBinder binder;
     ServiceConnection serviceConnection;
@@ -86,9 +87,9 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
 
 
-         fragment = getSupportFragmentManager().findFragmentById(R.id.frame1);
+        fragment = getSupportFragmentManager().findFragmentById(R.id.frame1);
         editText = findViewById(R.id.searchText);
-        searchBtn = findViewById(R.id.btnSearch);
+        searchBtn = (Button)fragment.findViewById(R.id.btnSearch);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             MainActivity.this.bookDetailsFragment = BookDetailsFragment.newInstance(new Book(0,"","",0,0,""));
 
 
+            //the view pager for portrait and the lists of book in landscape mode
             if (findViewById(R.id.frame2) == null) {
                 if (fragment instanceof BookListFragment) {
                     getSupportFragmentManager().beginTransaction().remove(fragment).commit();
