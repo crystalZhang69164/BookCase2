@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
         fragment = getSupportFragmentManager().findFragmentById(R.id.frame1);
         editText = findViewById(R.id.searchText);
-        searchBtn = (Button)fragment.findViewById(R.id.btnSearch);
+        searchBtn = findViewById(R.id.btnSearch);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
