@@ -28,7 +28,7 @@
 
     <Button
         android:id="@+id/pauseplay"
-        android:layout_width="129dp"
+        android:layout_width="140dp"
         android:layout_height="match_parent"
         android:layout_weight=".15"
         android:background="@drawable/ic_pause_circle_outline_black_24dp" />
