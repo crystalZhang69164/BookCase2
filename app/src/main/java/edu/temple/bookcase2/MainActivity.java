@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import org.json.JSONArray;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     FrameLayout player;
     Button searchBtn;
     EditText editText;
+    boolean isSinglePane;
+    Handler handler;
 
 
     ViewPager pager;
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             public void onServiceConnected(ComponentName className, IBinder service){
                 connected = true;
                 binder = (AudiobookService.MediaControlBinder) service;
+                binder.setProgressHandler(handler);
             }
 
             @Override
@@ -149,9 +153,11 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             MainActivity.this.bookListFragment = BookListFragment.newInstance(books);
             MainActivity.this.bookDetailsFragment = BookDetailsFragment.newInstance(new Book(0,"","",0,0,""));
 
+            isSinglePane = findViewById(R.id.frame2) == null;
 
             //the view pager for portrait and the lists of book in landscape mode
-            if (findViewById(R.id.frame2) == null) {
+            //singlePane
+            if (isSinglePane) {
                 if (fragment instanceof BookListFragment) {
                     getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                 }
@@ -234,14 +240,15 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(BookListURL.openStream()));
 
-            String response = "", tempResponse;
+            String response = "", tmpResponse;
 
-            tempResponse = reader.readLine();
-            while (tempResponse != null) {
-                response = response + tempResponse;
-                tempResponse = reader.readLine();
+            tmpResponse = reader.readLine();
+            while (tmpResponse != null) {
+                response = response + tmpResponse;
+                tmpResponse = reader.readLine();
             }
 
+            reader.close();
             JSONArray bookArray = new JSONArray(response);
             Message msg = Message.obtain();
             msg.obj = bookArray;
@@ -283,6 +290,35 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         //sets the player visibility to invisible
         player.setVisibility(View.GONE);
     }
+
+    @Override
+    public void pauseAudioLandscape() {
+
+        binder.pause();
+    }
+
+    @Override
+    public void playAudioLandscape(int bookId, int position) {
+        binder.play(bookId, position);
+    }
+
+    @Override
+    public void stopAudioLandscape() {
+
+        binder.stop();
+    }
+
+    @Override
+    public void playAudioLandscape(File audioFile, int position) {
+        binder.play(audioFile, position);
+    }
+
+    @Override
+    public void seekToAudioLandscape(int position) {
+
+        binder.seekTo(position);
+    }
+
 
 
 }

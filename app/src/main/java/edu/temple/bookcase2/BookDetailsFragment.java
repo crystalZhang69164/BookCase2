@@ -15,10 +15,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class BookDetailsFragment extends Fragment {
 
     Context parent;
@@ -67,6 +66,7 @@ public class BookDetailsFragment extends Fragment {
         publishedView = view.findViewById(R.id.publishedView);
         publishedView.setText(String.valueOf(book.getPublished()));
         coverView = view.findViewById(R.id.imageView);
+
         if (!book.getCoverURL().isEmpty())
             Picasso.get().load(book.getCoverURL()).into(coverView);
 
@@ -76,6 +76,10 @@ public class BookDetailsFragment extends Fragment {
                 ((PlayButtonInterface) BookDetailsFragment.this.parent).playButtonClicked(book);
             }
         });
+
+        view.findViewById(R.id.playbutton).setOnClickListener((v)-> {
+            (PlayButtonInterface)
+        };
         return view;
     }
 
@@ -96,6 +100,18 @@ public class BookDetailsFragment extends Fragment {
         bundle.putParcelable(BOOK_KEY, book);
         bookDetailsFragment.setArguments(bundle);
         return bookDetailsFragment;
+    }
+    public interface landscapeAudioCtrl{
+
+        void pauseAudioLandscape();
+
+        void playAudioLandscape(int bookId, int position);
+
+        void stopAudioLandscape();
+
+        void playAudioLandscape(File audioFile, int timeMark);
+
+        void seekToAudioLandscape(int position);
     }
 
     interface PlayButtonInterface
